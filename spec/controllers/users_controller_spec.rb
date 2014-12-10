@@ -13,16 +13,28 @@ RSpec.describe UsersController, :type => :controller do
     # redirect to the home page
     # signs the user in
     # if doesn't save, render the new form again
+    let(:request) { post :create, user: {email: "b@example.com"} }
+
     it "adds a user to the database" do
       # post(:create, {user: {email: "b@example.com"}})
       count = User.all.count
-      post :create, user: {email: "b@example.com"}
+      request
       expect(User.all.count).to eq count + 1
     end
 
     it 'redirects to home page' do
-      post :create, user: {email: "b@example.com"}
+      request
       expect(response).to redirect_to root_path
     end
+
+    it 'assign the users id to session' do
+      request
+      expect(session[:user_id]).to eq assigns(:user).id
+    end
+
+
+
+
+
   end
 end
