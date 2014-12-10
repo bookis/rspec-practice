@@ -9,14 +9,9 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "POST 'create'" do
-    # Create a user
-    # redirect to the home page
-    # signs the user in
-    # if doesn't save, render the new form again
     let(:request) { post :create, user: {email: "b@example.com"} }
 
     it "adds a user to the database" do
-      # post(:create, {user: {email: "b@example.com"}})
       count = User.all.count
       request
       expect(User.all.count).to eq count + 1
