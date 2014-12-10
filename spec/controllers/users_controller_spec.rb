@@ -27,9 +27,14 @@ RSpec.describe UsersController, :type => :controller do
       expect(session[:user_id]).to eq assigns(:user).id
     end
 
+    describe "mailer" do
+      it "delivers to the new user" do
+        # count = ActionMailer::Base.deliveries.count
+        # execute the block
+        # ActionMailer::Base.deliveries.count should change by 1 from count
+        expect { request }.to change(ActionMailer::Base.deliveries, :count).by(1)
 
-
-
-
+      end
+    end
   end
 end
